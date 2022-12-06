@@ -74,7 +74,56 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+// Slice - Does not mutate original array
+/////////////////////////////////////////////////
+// Slice takes what you want from an array and returns a new array.  arr.slice(start, end).  Will start on the first number and end on the number BEFORE the last number. So arr.slice(2, 4) will include c and d.  If an end number isnt specified it will just return the remaining elements of the array. We can start at the beginning, or at the end(using -1, -2 etc).
+
+// We can create a Shallow copy of an array by just calling arr.slice() with no arguments.
 
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
-console.log(arr.slice(0 / 3));
+console.log(arr.slice(2)); // ['c', 'd', 'e']
+console.log(arr.slice(2, 4)); // ['c', 'd']
+console.log(arr.slice(-2)); // ['e', 'd']
+console.log(arr.slice(-1)); // ['e']
+console.log(arr.slice(1, -2)); // ['b', 'c'];
+console.log(arr.slice()); // ['a', 'b', 'c', 'd', 'e']
+console.log([...arr]); // ['a', 'b', 'c', 'd', 'e']
+
+////////////////////////////////////////////////////////
+// Splice - Mutates original array
+////////////////////////////////////////////////////////
+
+// console.log(arr.splice(2)); // ['c', 'd', 'e']
+// console.log(arr); // ['a', 'b']
+// arr.splice(-1); // Will delete the last element of an array. - or will return that value
+
+const arr2 = ['a', 'b', 'c', 'd', 'e'];
+// arr.splice(first element, number to delete - see below)
+const arr3 = arr2.splice(1, 3);
+console.log(arr2); // ['a', 'e']
+console.log(arr3); // ['b', 'c', 'd']
+
+////////////////////////////////////////////////////////
+// Reverse - Mutates original array
+////////////////////////////////////////////////////////
+const arrReverse = ['a', 'b', 'c', 'd', 'e'];
+console.log(arrReverse.reverse()); // ['e', 'd', 'c', 'b', 'a']
+
+////////////////////////////////////////////////////////
+// Concat - Does not mutate the original arrays
+////////////////////////////////////////////////////////
+
+const letters1 = ['a', 'b', 'c', 'd', 'e'];
+const letters2 = ['f', 'g', 'h', 'i', 'j'];
+
+const lettersConcat = letters1.concat(letters2);
+console.log(lettersConcat); // Adds the 2 arrays together
+const lettersSpread = [...letters1, ...letters2];
+console.log(lettersSpread); // Will achieve the same results, also does not mutate the original arrays
+
+////////////////////////////////////////////////////////
+// Join
+////////////////////////////////////////////////////////
+
+console.log(lettersConcat.join(' - ')); // a - b - c - d... so on.  Returns a string, not an array.
