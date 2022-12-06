@@ -214,3 +214,33 @@ displayMovements(account1.movements);
 // currenciesUnique.forEach((value, _, set) => {
 //   console.log(`${_}: ${value}`);
 // });
+
+////////////////////////////////////////////////////////
+// Data Transformations, Map, Filter, Reduce
+////////////////////////////////////////////////////////
+
+// Map returns a New Array containing the results of applying an operation on all original elements
+
+// Filter returns a New Array containing the array elements that passed a specified test condition
+
+// Reduce boils ("reduces") all array elements down to one single value (eg. adding all elements together)
+
+/////////////////////////////////////////////////////
+// Map
+/////////////////////////////////////////////////////
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const eurToUsd = 1.1;
+
+const movementsUSD = movements.map(mov => mov * eurToUsd);
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'desposited' : 'withdrew'} $${Math.abs(
+      mov
+    )}`
+);
+
+console.log(movementsDescriptions);
