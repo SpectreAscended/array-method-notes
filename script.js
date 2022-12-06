@@ -71,7 +71,7 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -135,11 +135,42 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // at Method - Also works with strings
 ////////////////////////////////////////////////////////
 
-const arr = [23, 11, 64];
-console.log(arr[0]); // 23
-console.log(arr.at(23)); // 23
-console.log(arr[arr.length - 1]); // 64
-console.log(arr.slice(-1)[0]); // 64
-console.log(arr.at(-1)); // 64
-console.log('cory'.at(0)); // c
-console.log('cory'.at(-1)); // y
+// const arr = [23, 11, 64];
+// console.log(arr[0]); // 23
+// console.log(arr.at(23)); // 23
+// console.log(arr[arr.length - 1]); // 64
+// console.log(arr.slice(-1)[0]); // 64
+// console.log(arr.at(-1)); // 64
+// console.log('cory'.at(0)); // c
+// console.log('cory'.at(-1)); // y
+
+////////////////////////////////////////////////////////
+// forEach - Looping over arrays
+////////////////////////////////////////////////////////
+
+// forEach - You can't break out of a loop.  It will always loop over the entire array, so if you need to break out of a loop at some point it is better to use 'for of'
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// for (const movement of movements) {
+//   if (movement > 0) {
+//     console.log(`You deposited $${movement}`);
+//   } else {
+//     console.log(`You withdrew $${Math.abs(movement)}`);
+//   }
+// }
+// console.log('---for of---');
+// for (const [i, movement] of movements.entries()) {
+//   if (movement > 0) {
+//     console.log(`Movement ${i + 1}: You deposited $${movement}`);
+//   } else {
+//     console.log(`Movement ${i + 1}: You withdrew $${Math.abs(movement)}`);
+//   }
+// }
+
+// console.log('---forEach---');
+// movements.forEach((movement, i, arr) => {
+//   movement > 0
+//     ? console.log(`Movement ${i + 1}: Deposit: $${movement}`)
+//     : console.log(`Movement ${i + 1}: Withdrawal: $${Math.abs(movement)}`);
+// });
