@@ -16,24 +16,46 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 GOOD LUCK
 */
 
-const julia1 = [3, 5, 2, 12, 7];
-const kate1 = [4, 1, 15, 8, 3];
+// const julia1 = [3, 5, 2, 12, 7];
+// const kate1 = [4, 1, 15, 8, 3];
 
-const julia2 = [9, 16, 6, 8, 3];
-const kate2 = [10, 5, 6, 1, 4];
+// const julia2 = [9, 16, 6, 8, 3];
+// const kate2 = [10, 5, 6, 1, 4];
 
-const correctedJulia = julia1.slice(1, -1);
-const bothArrays = correctedJulia.concat(kate1);
-console.log(bothArrays);
+// const correctedJulia = julia1.slice(1, -2);
+// const bothArrays = correctedJulia.concat(kate1);
+// console.log(bothArrays);
 
-function checkDogs(dogs) {
-  dogs.forEach((dogAge, i) => {
-    dogAge >= 5
-      ? console.log(
-          `Dog number ${i + 1} is an adult, and is ${dogAge} years old`
-        )
-      : console.log(`Dog number ${i + 1} is still a puppy`);
+// function checkDogs(dogs) {
+//   dogs.forEach((dogAge, i) => {
+//     dogAge >= 3
+//       ? console.log(
+//           `Dog number ${i + 1} is an adult, and is ${dogAge} years old`
+//         )
+//       : console.log(`Dog number ${i + 1} is still a puppy`);
+//   });
+// }
+
+// checkDogs(bothArrays);
+
+// Instructor Solution ////////////////
+
+const checkDogs = function (dogsJulia, dogsKate) {
+  const dogsJuliaCorrected = dogsJulia.slice();
+  dogsJuliaCorrected.splice(0, 1);
+  dogsJuliaCorrected.splice(-2);
+  console.log(dogsJuliaCorrected);
+
+  const dogs = dogsJuliaCorrected.concat(dogsKate);
+
+  dogs.forEach((dog, i) => {
+    if (dog >= 3) {
+      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+    } else {
+      console.log(`Dog number ${i + 1} is still a puppy`);
+    }
   });
-}
+};
 
-checkDogs(bothArrays);
+// checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
