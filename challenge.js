@@ -22,8 +22,8 @@ const kate1 = [4, 1, 15, 8, 3];
 const julia2 = [9, 16, 6, 8, 3];
 const kate2 = [10, 5, 6, 1, 4];
 
-const correctedJulia1 = julia1.slice(1, -1);
-const bothArrays = correctedJulia1.concat(kate1);
+const correctedJulia = julia1.slice(1, -1);
+const bothArrays = correctedJulia.concat(kate1);
 console.log(bothArrays);
 
 function checkDogs(dogs) {
