@@ -80,6 +80,13 @@ function displayMovements(movements) {
 
 displayMovements(account1.movements);
 
+function calcPrintBalance(movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance}€`;
+}
+
+calcPrintBalance(account1.movements);
+
 function createUsenames(accs) {
   accs.forEach(acc => {
     acc.username = acc.owner
@@ -263,12 +270,47 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // Filter
 /////////////////////////////////////////////////////////
 
-const deposits = movements.filter((mov, i, arr) => {
-  return mov > 0;
-});
+// const deposits = movements.filter((mov, i, arr) => {
+//   return mov > 0;
+// });
 
-const withdrawals = movements.filter(mov => mov < 0);
+// const withdrawals = movements.filter(mov => mov < 0);
 
-console.log(movements);
-console.log(deposits);
-console.log(withdrawals);
+// console.log(movements);
+// console.log(deposits);
+// console.log(withdrawals);
+
+/////////////////////////////////////////////////////////
+// Reduce
+/////////////////////////////////////////////////////////
+
+// 0 at the end is the INITIAL value of the accumulator
+
+// const balance = movements.reduce((accumulator, current, i, arr) => {
+//   console.log(
+//     `Iteration number ${
+//       i + 1
+//     }. Current value: $${current}. Previous total: $${accumulator}`
+//   );
+//   return accumulator + current;
+// }, 0);
+
+// Above function written cleaner
+
+// const balance = movements.reduce((acc, cur) => acc + cur, 0);
+
+// console.log(balance);
+
+// let balance2 = 0;
+// for (const mov of movements) balance2 += mov;
+// console.log(balance2);
+
+// Maximum value
+// Your starting point should always be the first value of the array if you are trying to find a maximum or minimum value.  Don't just put it as 0.
+
+const maxValue = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+
+console.log(maxValue);
