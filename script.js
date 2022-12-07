@@ -348,6 +348,10 @@ const eurToUsd = 1.1;
 
 // For debugging we can access the current array in the NEXT method to see what's going on
 
+// Chaining methods can have in impact on performance, so try to do as little as possible.
+
+// It is BAD practice to chain methods that mutate the original array, such as Splice method.
+
 // PIPELINE
 const totalDepositsUSD = movements
   .filter(mov => mov > 0)
