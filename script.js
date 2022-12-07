@@ -242,7 +242,7 @@ createUsenames(accounts);
 /////////////////////////////////////////////////////
 // Map
 /////////////////////////////////////////////////////
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // const eurToUsd = 1.1;
 
@@ -258,3 +258,17 @@ createUsenames(accounts);
 // );
 
 // console.log(movementsDescriptions);
+
+/////////////////////////////////////////////////////////
+// Filter
+/////////////////////////////////////////////////////////
+
+const deposits = movements.filter((mov, i, arr) => {
+  return mov > 0;
+});
+
+const withdrawals = movements.filter(mov => mov < 0);
+
+console.log(movements);
+console.log(deposits);
+console.log(withdrawals);
