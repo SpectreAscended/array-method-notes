@@ -81,22 +81,21 @@ GOOD LUCK
 */
 
 function calcAverageHumanAge(ages) {
-  const humanAge = ages.map(dogAge => {
+  const humanAges = ages.map(dogAge => {
     if (dogAge > 2) return 16 + dogAge * 4;
     else return 2 * dogAge;
   });
 
-  const adultDogs = humanAge.filter(age => age >= 18);
+  const adultDogs = humanAges.filter(age => age >= 18);
 
-  const totalAge = adultDogs.reduce((acc, age, i, arr) => {
-    return acc + age;
-  }, adultDogs[0]);
+  const average =
+    adultDogs.reduce((acc, age, i, arr) => {
+      return acc + age;
+    }, 0) / adultDogs.length;
 
-  const averageAge = totalAge / adultDogs.length;
-
-  console.log(humanAge);
+  console.log(humanAges);
   console.log(adultDogs);
-  console.log(averageAge);
+  console.log(average);
 }
 
 calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
