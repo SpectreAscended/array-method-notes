@@ -353,13 +353,38 @@ const eurToUsd = 1.1;
 // It is BAD practice to chain methods that mutate the original array, such as Splice method.
 
 // PIPELINE
-const totalDepositsUSD = movements
-  .filter(mov => mov > 0)
-  // .map(mov => mov * eurToUsd)
-  .map((mov, _, arr) => {
-    console.log(arr);
-    return mov * eurToUsd;
-  })
-  .reduce((acc, mov) => acc + mov, 0);
+// const totalDepositsUSD = movements
+//   .filter(mov => mov > 0)
+//   // .map(mov => mov * eurToUsd)
+//   .map((mov, _, arr) => {
+//     console.log(arr);
+//     return mov * eurToUsd;
+//   })
+//   .reduce((acc, mov) => acc + mov, 0);
 
-console.log(totalDepositsUSD);
+// console.log(totalDepositsUSD);
+
+///////////////////////////////////////////////////////
+// Find
+///////////////////////////////////////////////////////
+
+// Find will NOT return an array, instead it will only return the FIRST element that meets this condition.  In otherwords, it will return the first element in the array in which our mov < 0 statement becomes 'true'.
+
+// Similar to filter, except filter will return an array with all elements that meet this statement, instead of just the first one.
+
+const firstWithdrawal = movements.find(mov => mov < 0);
+
+console.log(movements);
+console.log(firstWithdrawal);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+
+console.log(account);
+
+let accountsFor;
+
+for (const account of accounts) {
+  if (account.owner === 'Jessica Davis') accountsFor = account;
+}
+
+console.log(accountsFor);
