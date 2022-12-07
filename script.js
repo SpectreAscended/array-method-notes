@@ -87,6 +87,30 @@ function calcPrintBalance(movements) {
 
 calcPrintBalance(account1.movements);
 
+function calcDisplaySummary(movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter(int => int >= 1)
+    .reduce((acc, int) => acc + int, 0);
+
+  labelSumInterest.textContent = `${interest}€`;
+}
+
+calcDisplaySummary(account1.movements);
+
 function createUsenames(accs) {
   accs.forEach(acc => {
     acc.username = acc.owner
@@ -308,9 +332,30 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // Maximum value
 // Your starting point should always be the first value of the array if you are trying to find a maximum or minimum value.  Don't just put it as 0.
 
-const maxValue = movements.reduce((acc, mov) => {
-  if (acc > mov) return acc;
-  else return mov;
-}, movements[0]);
+// const maxValue = movements.reduce((acc, mov) => {
+//   if (acc > mov) return acc;
+//   else return mov;
+// }, movements[0]);
 
-console.log(maxValue);
+// console.log(maxValue);
+
+/////////////////////////////////////////////////////////
+// Chaining methods
+/////////////////////////////////////////////////////////
+const eurToUsd = 1.1;
+
+// All of these methods return an array (Except reduce. Reduce returns a single value), so we can keep chaining methods onto it to manipulate the arrays
+
+// For debugging we can access the current array in the NEXT method to see what's going on
+
+// PIPELINE
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  // .map(mov => mov * eurToUsd)
+  .map((mov, _, arr) => {
+    console.log(arr);
+    return mov * eurToUsd;
+  })
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalDepositsUSD);
