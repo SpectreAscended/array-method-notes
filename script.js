@@ -179,6 +179,21 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = +inputLoanAmount.value;
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add movement
+    currentAccount.movements.push(amount);
+
+    // Update UI
+    updateUI(currentAccount);
+  }
+
+  // Clear input field
+  inputLoanAmount.value = '';
+});
+
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -479,3 +494,34 @@ const eurToUsd = 1.1;
 // with findIndex we can use a complex condition to find the element we are looking for.
 
 // You get access to the entire array in findIndex, but there is very little use case for that.
+
+////////////////////////////////////////////////////////
+// Some - method
+////////////////////////////////////////////////////////
+
+console.log(movements);
+
+// EQUALITY - Checks only for equality and returns a boolean
+console.log(movements.includes(-130)); // true
+
+// CONDITION - Checks a specified range and returns a boolean
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log(anyDeposits);
+
+////////////////////////////////////////////////////////
+// Every - method
+////////////////////////////////////////////////////////
+
+// Similar to some, but EVERY element in our condition needs to be true.
+
+console.log(movements.every(mov => mov > 0)); // false
+console.log(account4.movements.every(mov => mov > 0)); //true, because in this array, all values are above 0.
+
+////////////////////////////////////////////////////////
+// Separate callback
+////////////////////////////////////////////////////////
+
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
