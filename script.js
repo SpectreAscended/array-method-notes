@@ -179,6 +179,27 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  console.log();
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    +inputClosePin.value === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.userName === currentAccount.userName
+    );
+
+    // Delete account
+    accounts.splice(index, 1);
+
+    // Hide UI
+    containerApp.style.opacity = 0;
+  }
+
+  inputCloseUsername.value = inputClosePin.value = '';
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -428,19 +449,33 @@ const eurToUsd = 1.1;
 
 // Similar to filter, except filter will return an array with all elements that meet this statement, instead of just the first one.
 
-const firstWithdrawal = movements.find(mov => mov < 0);
+// const firstWithdrawal = movements.find(mov => mov < 0);
 
-console.log(movements);
-console.log(firstWithdrawal);
+// console.log(movements);
+// console.log(firstWithdrawal);
 
-const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 
-console.log(account);
+// console.log(account);
 
-let accountsFor;
+// let accountsFor;
 
-for (const account of accounts) {
-  if (account.owner === 'Jessica Davis') accountsFor = account;
-}
+// for (const account of accounts) {
+//   if (account.owner === 'Jessica Davis') accountsFor = account;
+// }
 
-console.log(accountsFor);
+// console.log(accountsFor);
+
+//////////////////////////////////////////////////////
+// Find Index
+//////////////////////////////////////////////////////
+
+// accounts.findIndex((acc, array) => acc.username === currentAccount.username) {...}
+
+// Similar to find, but it returns the index in the array that its in.
+
+// Similar to indexOf, except we need to pass in a callback function
+
+// with findIndex we can use a complex condition to find the element we are looking for.
+
+// You get access to the entire array in findIndex, but there is very little use case for that.
