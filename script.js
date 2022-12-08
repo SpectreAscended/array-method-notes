@@ -499,29 +499,59 @@ const eurToUsd = 1.1;
 // Some - method
 ////////////////////////////////////////////////////////
 
-console.log(movements);
+// console.log(movements);
 
-// EQUALITY - Checks only for equality and returns a boolean
-console.log(movements.includes(-130)); // true
+// // EQUALITY - Checks only for equality and returns a boolean
+// console.log(movements.includes(-130)); // true
 
-// CONDITION - Checks a specified range and returns a boolean
-const anyDeposits = movements.some(mov => mov > 1500);
-console.log(anyDeposits);
+// // CONDITION - Checks a specified range and returns a boolean
+// const anyDeposits = movements.some(mov => mov > 1500);
+// console.log(anyDeposits);
+
+// ////////////////////////////////////////////////////////
+// // Every - method
+// ////////////////////////////////////////////////////////
+
+// // Similar to some, but EVERY element in our condition needs to be true.
+
+// console.log(movements.every(mov => mov > 0)); // false
+// console.log(account4.movements.every(mov => mov > 0)); //true, because in this array, all values are above 0.
+
+// ////////////////////////////////////////////////////////
+// // Separate callback
+// ////////////////////////////////////////////////////////
+
+// const deposit = mov => mov > 0;
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
 
 ////////////////////////////////////////////////////////
-// Every - method
+// flat and flatMap methods
 ////////////////////////////////////////////////////////
 
-// Similar to some, but EVERY element in our condition needs to be true.
+// Removes nested arrays and puts them in a single array. Only goes one level deep, though by default.  We can specify how many levels deep we would like to go arr.flat(2) will go 2 levels deep
 
-console.log(movements.every(mov => mov > 0)); // false
-console.log(account4.movements.every(mov => mov > 0)); //true, because in this array, all values are above 0.
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat()); // [1, 2, 3, 4, 5, 6, 7, 8]
 
-////////////////////////////////////////////////////////
-// Separate callback
-////////////////////////////////////////////////////////
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
 
-const deposit = mov => mov > 0;
-console.log(movements.some(deposit));
-console.log(movements.every(deposit));
-console.log(movements.filter(deposit));
+const accountMovements = accounts.map(acc => acc.movements);
+
+console.log(accountMovements);
+
+const allMovements = accountMovements.flat();
+console.log(allMovements);
+const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+
+console.log(overallBalance);
+
+const totalBalance = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalBalance);
+
+// Flat map basically just combines map with flat methods.  Flat map ONLY goes one level deep.  You can't adjust it.
