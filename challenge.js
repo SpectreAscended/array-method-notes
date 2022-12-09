@@ -139,7 +139,7 @@ Eating an okay amount means the dog's current food portion is within a range 10%
 1. Loop over the array containing dog objects, and for each dog, calculate the recommended food portion and add it to the object as a new property. Do NOT create an array, simply loop over the array.
 Formula: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
 
-2. Find Sarah's dog and log to the console whether it's eating too much or too little. HINT: Some dogs have mutple owners, so you first need to find Sarah in the owners array, and so this one is a bit tricky (on purpose)
+2. Find Sarah's dog and log to the console whether it's eating too much or too little. HINT: Some dogs have multiple owners, so you first need to find Sarah in the owners array, and so this one is a bit tricky (on purpose)
 
 3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch') and an array with all owners of dogs who eat too little ('ownersEatTooLittle')
 
@@ -174,3 +174,73 @@ const dogs = [
   { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
   { weight: 32, curFood: 340, owners: ['Michael'] },
 ];
+
+// 1.
+dogs.forEach(
+  dog => (dog.reccomendedFood = Math.trunc(dog.weight ** 0.75 * 28))
+);
+
+console.log(dogs);
+
+// 2.
+
+const sarahsDog = dogs.find(dog => dog.owners.includes('Sarah'));
+
+if (sarahsDog.reccomendedFood < sarahsDog.curFood) {
+  console.log("Sarah's dog is eating too much");
+} else {
+  console.log("Sarah's dog is eating too little");
+}
+
+// 3.
+
+const eatsTooLittle = [];
+const eatsTooMuch = [];
+
+dogs.filter(dog =>
+  dog.curFood > dog.reccomendedFood
+    ? eatsTooMuch.push(dog)
+    : eatsTooLittle.push(dog)
+);
+
+// 4.
+
+// eatsTooLittle.forEach(dog =>
+//   console.log(`${dog.owners.join(' and ')}'s dogs eat too much`)
+// );
+
+console.log(
+  `${eatsTooLittle
+    .flatMap(dog => dog.owners)
+    .join(' and ')}'s dogs eat too little`
+);
+
+console.log(
+  `${eatsTooMuch.flatMap(dog => dog.owners).join(' and ')}'s dogs eat too much`
+);
+
+// 5.
+console.log(dogs.some(dog => dog.reccomendedFood === dog.curFood));
+
+// 6.
+
+const okayAmount = dogs.some(
+  dog =>
+    dog.curFood > dog.reccomendedFood * 0.9 &&
+    dog.curFood < dog.reccomendedFood * 1.1
+);
+
+const foodCheck = function (dog) {
+  console.log(dog);
+  return (
+    dog.curFood > dog.reccomendedFood * 0.9 &&
+    dog.curFood < dog.reccomendedFood * 1.1
+  );
+};
+
+console.log(okayAmount);
+// console.log(dogs.forEach(dog => foodCheck(dog)));
+
+// 7.
+// const okayAmountArr = dogs.filter(dog => okayAmount);
+// console.log(okayAmountArr);
