@@ -640,16 +640,98 @@ const eurToUsd = 1.1;
 // Convert node list to Array
 ////////////////////////////////////////////////////////
 
-labelBalance.addEventListener('click', function () {
-  const movementsUI = Array.from(
-    document.querySelectorAll('.movements__value'),
-    el => +el.textContent.replace('€', '')
+// labelBalance.addEventListener('click', function () {
+//   const movementsUI = Array.from(
+//     document.querySelectorAll('.movements__value'),
+//     el => +el.textContent.replace('€', '')
+//   );
+
+//   // console.log(movementsUI.map(el => +el.textContent.replace('€', '')));
+
+//   console.log(movementsUI); // [1300, 70, -130, -650, 3000, -400, 450, 200]
+
+//   const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+//   console.log(movementsUI2);
+// });
+
+////////////////////////////////////////////////////////
+// Array Methods Practice
+////////////////////////////////////////////////////////
+
+// 1.
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(bankDepositSum);
+
+// 2.
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+
+// Use reduce to count something in an array.  If the current number is greater or equal to 1000 it will add one to the count, if not it will simply return the current count
+
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((count, cur) => (cur >= 1000 ? count++ : count), 0);
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+
+console.log(numDeposits1000); // 6
+
+// Prefixed ++ operator
+let a = 10;
+console.log(a++); // 10
+console.log(a); // 11
+console.log(++a); // 12
+// ++ will still return the original value, although it does actually increment 10 by 1, so this is why we can't use it in our Reduce method.  We can fix this behavior by using the "prefixed" version of the ++ operator.  ++a.
+
+// 3.
+// const sums = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     (sums, cur) => {
+//       cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+//       return sums;
+//     },
+//     { deposits: 0, withdrawals: 0 }
+//   );
+
+// console.log(sums); // {deposits: 25180, withdrawls: -7340}
+
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
   );
 
-  // console.log(movementsUI.map(el => +el.textContent.replace('€', '')));
+console.log(deposits, withdrawals);
 
-  console.log(movementsUI); // [1300, 70, -130, -650, 3000, -400, 450, 200]
+// 4.
 
-  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
-  console.log(movementsUI2);
-});
+// this is a nice title -> This Is a Nice Title
+const convertTitleCase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
