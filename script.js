@@ -544,27 +544,27 @@ const eurToUsd = 1.1;
 
 // Removes nested arrays and puts them in a single array. Only goes one level deep, though by default.  We can specify how many levels deep we would like to go arr.flat(2) will go 2 levels deep
 
-const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
-console.log(arr.flat()); // [1, 2, 3, 4, 5, 6, 7, 8]
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat()); // [1, 2, 3, 4, 5, 6, 7, 8]
 
-const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
-console.log(arrDeep.flat(2));
+// const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+// console.log(arrDeep.flat(2));
 
-const accountMovements = accounts.map(acc => acc.movements);
+// const accountMovements = accounts.map(acc => acc.movements);
 
-console.log(accountMovements);
+// console.log(accountMovements);
 
-const allMovements = accountMovements.flat();
-console.log(allMovements);
-const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
 
-console.log(overallBalance);
+// console.log(overallBalance);
 
-const totalBalance = accounts
-  .flatMap(acc => acc.movements)
-  .reduce((acc, mov) => acc + mov, 0);
+// const totalBalance = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
 
-console.log(totalBalance);
+// console.log(totalBalance);
 
 // Flat map basically just combines map with flat methods.  Flat map ONLY goes one level deep.  You can't adjust it.
 
@@ -572,8 +572,8 @@ console.log(totalBalance);
 // Sorting arrays
 ///////////////////////////////////////////////////////
 
-const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
-console.log(owners.sort()); // ['Adam', 'Jonas', 'Martha', 'Zach']  Sorts alphabetically. Mutates original array, so be careful with this method.
+// const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+// console.log(owners.sort()); // ['Adam', 'Jonas', 'Martha', 'Zach']  Sorts alphabetically. Mutates original array, so be careful with this method.
 
 // console.log(movements.sort()); // [-130, -400, -650, 1300, 200, 3000, 450, 70]
 // Sort method sorts things by String, so that is why these numbers are not in the order you'd expect.
@@ -587,18 +587,69 @@ console.log(owners.sort()); // ['Adam', 'Jonas', 'Martha', 'Zach']  Sorts alphab
 //   if (a > b) return 1;
 //   if (b > a) return -1;
 // });
-movements.sort((a, b) => a - b);
+// movements.sort((a, b) => a - b);
 
-console.log(movements);
+// console.log(movements);
 
-// Descending
-// movements.sort((a, b) => {
-//   if (a > b) return -1;
-//   if (a < b) return 1;
-// });
-movements.sort((a, b) => b - a);
-console.log(movements);
+// // Descending
+// // movements.sort((a, b) => {
+// //   if (a > b) return -1;
+// //   if (a < b) return 1;
+// // });
+// movements.sort((a, b) => b - a);
+// console.log(movements);
 
-// console.log(movements.sort((a, b) => a - b)); //[-130, -400, -650, 1300, 200, 3000, 450, 70]
+// // console.log(movements.sort((a, b) => a - b)); //[-130, -400, -650, 1300, 200, 3000, 450, 70]
 
-// console.log(movements.sort((a, b) => b - a)); //[3000, 1300, 450, 200, 70, -130, -400, -650]
+// // console.log(movements.sort((a, b) => b - a)); //[3000, 1300, 450, 200, 70, -130, -400, -650]
+
+/////////////////////////////////////////////////////////
+// Creating and filling arrays programatically
+/////////////////////////////////////////////////////////
+
+// const arr = [1, 2, 3, 4, 5, 6, 7];
+// console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+// // Empty arrays + fill method
+// const x = new Array(7);
+// console.log(x); // [empty x 7] - This creates an array with 7 empty elements
+
+// x.fill(1, 3, 5);
+
+// console.log(x);
+// arr.fill(23, 2, 6);
+
+// console.log(arr); // [1, 2, 23, 23, 23, 23, 7]
+
+// // Array.from
+
+// const y = Array.from({ length: 7 }, () => 1);
+// console.log(y); // [1, 1, 1, 1, 1, 1, 1]
+
+// const z = Array.from({ length: 7 }, (_, i) => i + 1);
+
+// console.log(z); // [1, 2, 3, 4, 5, 6, 7]
+
+// const randomArray = Array.from({ length: 100 }, (_, i) =>
+//   Math.trunc(Math.random() * 6 + 1)
+// );
+
+// console.log(randomArray);
+
+////////////////////////////////////////////////////////
+// Convert node list to Array
+////////////////////////////////////////////////////////
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => +el.textContent.replace('€', '')
+  );
+
+  // console.log(movementsUI.map(el => +el.textContent.replace('€', '')));
+
+  console.log(movementsUI); // [1300, 70, -130, -650, 3000, -400, 450, 200]
+
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+  console.log(movementsUI2);
+});
