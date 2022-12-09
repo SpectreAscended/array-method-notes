@@ -215,6 +215,7 @@ btnClose.addEventListener('click', function (e) {
 
   inputCloseUsername.value = inputClosePin.value = '';
 });
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -555,3 +556,38 @@ const totalBalance = accounts
 console.log(totalBalance);
 
 // Flat map basically just combines map with flat methods.  Flat map ONLY goes one level deep.  You can't adjust it.
+
+///////////////////////////////////////////////////////
+// Sorting arrays
+///////////////////////////////////////////////////////
+
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort()); // ['Adam', 'Jonas', 'Martha', 'Zach']  Sorts alphabetically. Mutates original array, so be careful with this method.
+
+// console.log(movements.sort()); // [-130, -400, -650, 1300, 200, 3000, 450, 70]
+// Sort method sorts things by String, so that is why these numbers are not in the order you'd expect.
+// We can fix this by adding a 'compare' function into the method
+
+// return < 0, A, B (keep order)
+// return > 0, B, A (switch order)
+
+// Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (b > a) return -1;
+// });
+movements.sort((a, b) => a - b);
+
+console.log(movements);
+
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
+
+// console.log(movements.sort((a, b) => a - b)); //[-130, -400, -650, 1300, 200, 3000, 450, 70]
+
+// console.log(movements.sort((a, b) => b - a)); //[3000, 1300, 450, 200, 70, -130, -400, -650]
