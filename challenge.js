@@ -175,87 +175,161 @@ const dogs = [
   { weight: 32, curFood: 340, owners: ['Michael'] },
 ];
 
+/////////////////////////////////////////////////////////////////////////
+// My Attempt
+/////////////////////////////////////////////////////////////////////////
+
+// // 1.
+// dogs.forEach(
+//   dog => (dog.reccomendedFood = Math.trunc(dog.weight ** 0.75 * 28))
+// );
+
+// console.log(dogs);
+
+// // 2.
+
+// const sarahsDog = dogs.find(dog => dog.owners.includes('Sarah'));
+
+// if (sarahsDog.reccomendedFood < sarahsDog.curFood) {
+//   console.log("Sarah's dog is eating too much");
+// } else {
+//   console.log("Sarah's dog is eating too little");
+// }
+
+// // 3.
+
+// const eatsTooLittle = [];
+// const eatsTooMuch = [];
+
+// dogs.filter(dog =>
+//   dog.curFood > dog.reccomendedFood
+//     ? eatsTooMuch.push(dog)
+//     : eatsTooLittle.push(dog)
+// );
+
+// // 4.
+
+// // eatsTooLittle.forEach(dog =>
+// //   console.log(`${dog.owners.join(' and ')}'s dogs eat too much`)
+// // );
+
+// console.log(
+//   `${eatsTooLittle
+//     .flatMap(dog => dog.owners)
+//     .join(' and ')}'s dogs eat too little`
+// );
+
+// console.log(
+//   `${eatsTooMuch.flatMap(dog => dog.owners).join(' and ')}'s dogs eat too much`
+// );
+
+// // 5.
+// console.log(dogs.some(dog => dog.reccomendedFood === dog.curFood));
+
+// // 6.
+
+// const okayAmount = dogs.some(
+//   dog =>
+//     dog.curFood > dog.reccomendedFood * 0.9 &&
+//     dog.curFood < dog.reccomendedFood * 1.1
+// );
+
+// const foodCheck = function (dog) {
+//   console.log(dog);
+//   return (
+//     dog.curFood > dog.reccomendedFood * 0.9 &&
+//     dog.curFood < dog.reccomendedFood * 1.1
+//   );
+// };
+
+// console.log(okayAmount);
+// // console.log(dogs.forEach(dog => foodCheck(dog)));
+
+// // 7.
+// // const okayAmountArr = dogs.filter(dog => okayAmount);
+// // console.log(okayAmountArr);
+
+// // const healthyAmount = dogs.filter(dog => {
+// //   return (
+// //     dog.curFood > dog.reccomendedFood * 0.9 &&
+// //     dog.curFood < dog.reccomendedFood * 1.1
+// //   );
+// // });
+
+// const healthyAmount = dogs.filter(foodCheck, dogs);
+
+// console.log(healthyAmount);
+
+// // 8.
+
+// console.log(dogs.flatMap(dogs => dogs.reccomendedFood).sort((a, b) => a - b));
+
+/////////////////////////////////////////////////////////////////////////
+// Instructor solution
+/////////////////////////////////////////////////////////////////////////
+
 // 1.
 dogs.forEach(
-  dog => (dog.reccomendedFood = Math.trunc(dog.weight ** 0.75 * 28))
+  dog => (dog.recommendedFood = Math.trunc(dog.weight ** 0.75 * 28))
 );
 
 console.log(dogs);
 
 // 2.
+const dogSarah = dogs.find(dog => dog.owners.includes('Sarah'));
 
-const sarahsDog = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(dogSarah);
 
-if (sarahsDog.reccomendedFood < sarahsDog.curFood) {
-  console.log("Sarah's dog is eating too much");
-} else {
-  console.log("Sarah's dog is eating too little");
-}
+console.log(
+  `Sarah's dog is eating too ${
+    dogSarah.curFood > dogSarah.recommendedFood ? 'much' : 'little'
+  }`
+);
 
 // 3.
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recommendedFood)
+  .flatMap(dog => dog.owners);
 
-const eatsTooLittle = [];
-const eatsTooMuch = [];
+console.log(ownersEatTooMuch);
 
-dogs.filter(dog =>
-  dog.curFood > dog.reccomendedFood
-    ? eatsTooMuch.push(dog)
-    : eatsTooLittle.push(dog)
-);
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recommendedFood)
+  .flatMap(dog => dog.owners);
+
+console.log(ownersEatTooLittle);
 
 // 4.
 
-// eatsTooLittle.forEach(dog =>
-//   console.log(`${dog.owners.join(' and ')}'s dogs eat too much`)
-// );
-
-console.log(
-  `${eatsTooLittle
-    .flatMap(dog => dog.owners)
-    .join(' and ')}'s dogs eat too little`
-);
-
-console.log(
-  `${eatsTooMuch.flatMap(dog => dog.owners).join(' and ')}'s dogs eat too much`
-);
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much`);
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little`);
 
 // 5.
-console.log(dogs.some(dog => dog.reccomendedFood === dog.curFood));
+console.log(dogs.some(dog => dog.curFood === dog.recommendedFood));
 
 // 6.
+const checkEatingOkay = dog =>
+  dog.curFood > dog.recommendedFood * 0.9 &&
+  dog.curFood < dog.recommendedFood * 1.1;
 
-const okayAmount = dogs.some(
-  dog =>
-    dog.curFood > dog.reccomendedFood * 0.9 &&
-    dog.curFood < dog.reccomendedFood * 1.1
-);
-
-const foodCheck = function (dog) {
-  console.log(dog);
-  return (
-    dog.curFood > dog.reccomendedFood * 0.9 &&
-    dog.curFood < dog.reccomendedFood * 1.1
-  );
-};
-
-console.log(okayAmount);
-// console.log(dogs.forEach(dog => foodCheck(dog)));
+// console.log(
+//   dogs.some(
+//     dog =>
+//       dog.curFood > dog.recommendedFood * 0.9 &&
+//       dog.curFood < dog.recommendedFood * 1.1
+//   )
+// );
+console.log(dogs.some(checkEatingOkay));
 
 // 7.
-// const okayAmountArr = dogs.filter(dog => okayAmount);
-// console.log(okayAmountArr);
 
-// const healthyAmount = dogs.filter(dog => {
-//   return (
-//     dog.curFood > dog.reccomendedFood * 0.9 &&
-//     dog.curFood < dog.reccomendedFood * 1.1
-//   );
-// });
+const okAmount = dogs.filter(checkEatingOkay);
 
-const healthyAmount = dogs.filter(foodCheck, dogs);
-
-console.log(healthyAmount);
+console.log(okAmount);
 
 // 8.
+const dogsSorted = dogs
+  .slice()
+  .sort((a, b) => a.recommendedFood - b.recommendedFood);
 
-console.log(dogs.flatMap(dogs => dogs.reccomendedFood).sort((a, b) => a - b));
+console.log(dogsSorted);
