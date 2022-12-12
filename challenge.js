@@ -244,3 +244,18 @@ console.log(okayAmount);
 // 7.
 // const okayAmountArr = dogs.filter(dog => okayAmount);
 // console.log(okayAmountArr);
+
+// const healthyAmount = dogs.filter(dog => {
+//   return (
+//     dog.curFood > dog.reccomendedFood * 0.9 &&
+//     dog.curFood < dog.reccomendedFood * 1.1
+//   );
+// });
+
+const healthyAmount = dogs.filter(foodCheck, dogs);
+
+console.log(healthyAmount);
+
+// 8.
+
+console.log(dogs.flatMap(dogs => dogs.reccomendedFood).sort((a, b) => a - b));
